@@ -23,10 +23,9 @@ def makelist(n):
                 s = BeautifulSoup(urllib2.urlopen(info_url + u, timeout=1000))
                 tmp = s.find('div', {"id": "otherSoftBox"}).findAll('dt', {"class": "font14"})
                 print "[+] %s" %u
-                f.write(u)
                 for l in tmp:
                     print "[!] %s:%s" % (l.find('a').get('href'), l.find('a').contents[0])
-                    f.write(l.find('a').get('href').replace('/appinfo/','') + ":" + l.find('a').contents[0] + '\n')
+                    f.write(l.find('a').get('href').replace('/appinfo/','') + ":" + l.find('a').contents[0] + ":" + u + '\n')
 
 
     f.close()
