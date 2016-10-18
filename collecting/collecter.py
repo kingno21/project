@@ -10,13 +10,15 @@ page = 5
 def makelist(n):
     f = open('url{:02d}.txt'.format(n), 'w')
     for i in range((n-1) * page, n * page):
+        if i == 0:
+            continue
         print '[!] start page %s' %i
         data = urllib.urlencode({'pi': i})
         req = urllib2.Request(url, data)
         response = urllib2.urlopen(req)
         soup = BeautifulSoup(response)
 
-        for link in soup.findAll('a'):
+        for link in soup.find("div", {"id": "softListBox"}).findAll("a"):
             href = link.get('href')
             if "appdown" in str(href):
                 u = href.replace('/appdown/','')
